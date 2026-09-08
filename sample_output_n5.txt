@@ -1,0 +1,102 @@
+Input file: input.txt
+
+------------------------------------------------------------
+1. INPUT KEYS AND PROBABILITIES
+------------------------------------------------------------
+  n = 5
+
+     index           key   probability
+         1            10        0.1000
+         2            20        0.2000
+         3            30        0.4000
+         4            40        0.2000
+         5            50        0.1000
+                   total        1.0000
+
+------------------------------------------------------------
+2. DYNAMIC PROGRAMMING TABLES
+------------------------------------------------------------
+
+Cost table C[i][j]:
+                1        2        3        4        5
+  i =  1    0.1000   0.4000   1.1000   1.5000   1.8000
+  i =  2         -   0.2000   0.8000   1.2000   1.5000
+  i =  3         -        -   0.4000   0.8000   1.1000
+  i =  4         -        -        -   0.2000   0.4000
+  i =  5         -        -        -        -   0.1000
+
+Root table R[i][j] (key at the root):
+                1        2        3        4        5
+  i =  1        10       20       30       30       30
+  i =  2         -       20       30       30       30
+  i =  3         -        -       30       30       30
+  i =  4         -        -        -       40       40
+  i =  5         -        -        -        -       50
+
+------------------------------------------------------------
+3. MINIMUM EXPECTED SEARCH COST
+------------------------------------------------------------
+  C[1][5] = 1.800000
+
+------------------------------------------------------------
+4. STRUCTURE OF THE OPTIMAL BST
+------------------------------------------------------------
+Root: 30  (p = 0.4000)
+    L: 20  (p = 0.2000)
+        L: 10  (p = 0.1000)
+    R: 40  (p = 0.2000)
+        R: 50  (p = 0.1000)
+
+------------------------------------------------------------
+5. LEVEL OF EACH KEY
+------------------------------------------------------------
+         key   probability     level   comparisons
+          10        0.1000         2             3
+          20        0.2000         1             2
+          30        0.4000         0             1
+          40        0.2000         1             2
+          50        0.1000         2             3
+
+------------------------------------------------------------
+6. VERIFICATION
+------------------------------------------------------------
+  Cost from the DP table    : 1.800000
+  Cost from the built tree  : 1.800000
+  Difference                : 0.000e+00
+  Result                    : MATCH
+
+------------------------------------------------------------
+7. COMPARISON WITH A CONVENTIONAL BST
+------------------------------------------------------------
+  The conventional tree is built by inserting the keys one by one
+  in the given order.
+
+                                   Optimal BST  Conventional BST
+          Expected search cost          1.8000            3.0000
+      Average level (root = 0)          1.2000            2.0000
+                   Tree height               2                 4
+        Construction time (ms)        0.000126          0.000077
+
+  The optimal tree is 40.00 % cheaper.
+
+  Structure of the conventional BST:
+Root: 10  (p = 0.1000)
+    R: 20  (p = 0.2000)
+        R: 30  (p = 0.4000)
+            R: 40  (p = 0.2000)
+                R: 50  (p = 0.1000)
+
+------------------------------------------------------------
+8. EXPERIMENTAL ANALYSIS
+------------------------------------------------------------
+  Each size is executed 1000 times and the average is reported.
+
+         n Execution time (ms)     Min expected cost      Time ratio
+         5            0.000133              1.656724               -
+        10            0.000348              2.580205           2.63x
+        20            0.001578              3.295847           4.53x
+        50            0.021251              4.353753          13.47x
+       100            0.199879              5.133040           9.41x
+
+  Theoretical complexity: time O(n^3), space O(n^2).
+  When n is doubled the running time grows by about 8 times.
