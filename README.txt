@@ -12,10 +12,6 @@ FILES
  sample_output_n8.txt    Program output for input_n8.txt
  README.txt              This file
 
-COMPILE
--------
- Linux / macOS : g++ -std=c++11 -O2 -o obst obst.cpp
- Windows       : g++ -std=c++11 -O2 -o obst.exe obst.cpp
 
 RUN
 ---
