@@ -10,13 +10,12 @@ FILES
  input_n8.txt            Second test input, n = 8
  sample_output_n5.txt    Program output for input.txt
  sample_output_n8.txt    Program output for input_n8.txt
- DERLE_VE_CALISTIR.bat   Windows helper: compiles and starts the program
  README.txt              This file
 
 COMPILE
 -------
  Linux / macOS : g++ -std=c++11 -O2 -o obst obst.cpp
- Windows       : double-click DERLE_VE_CALISTIR.bat (needs g++ / MinGW-w64)
+ Windows       : g++ -std=c++11 -O2 -o obst.exe obst.cpp
 
 RUN
 ---
